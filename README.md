@@ -18,12 +18,18 @@ that you can get the build artefacts:
 # Supported build platforms
 
 * Ubuntu 20.04
+* Ubuntu 23.10
 
 # Building
 
 To build use
 
-    ./build.sh <build-directory>
+    ./build.sh <build-directory> <distro>
+
+Where distro can be one of:
+
+* ubuntu-20.04
+* ubuntu-23.10
 
 Build artefacts can be located from
 
