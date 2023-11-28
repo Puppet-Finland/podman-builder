@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM ubuntu:focal as build
+FROM --platform=$BUILDPLATFORM ubuntu:focal-20230126 as build
 
 WORKDIR /home/ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
