@@ -29,6 +29,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # Ubuntu 20.04 (64-bit)
-podman container rm $PROJECT-$DISTRO
-podman build $PROJECT/ -t $PROJECT
-podman run --name $PROJECT-$DISTRO -v podman-builds:/home/ubuntu/output $PROJECT:latest
+#
+IMAGE="${PROJECT}-${DISTRO}-build"
+CONTAINER="${IMAGE}-instance"
+
+podman build $PROJECT/ -t $IMAGE
+podman container rm $CONTAINER
+podman run -it --name $CONTAINER -v podman-builds:/home/ubuntu/output "localhost/$IMAGE"
