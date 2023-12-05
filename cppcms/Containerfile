@@ -1,0 +1,23 @@
+# Right now this install Ubuntu 23.10, but will change to 24.04 when that gets
+# released
+FROM docker.io/ubuntu:rolling
+
+WORKDIR /home/ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+    git \
+    ruby \
+    rubygems
+
+RUN gem install fpm
+
+RUN apt-get install -y build-essential python3 cmake libpcre3-dev zlib1g-dev libgcrypt20-dev libicu-dev
+
+COPY build.sh /home/ubuntu/
+
+ENV BASEDIR /home/ubuntu
+ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
+
+ENTRYPOINT ["/home/ubuntu/build.sh"]
