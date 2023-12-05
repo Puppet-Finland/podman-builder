@@ -20,11 +20,13 @@ COPY build.sh /home/ubuntu/
 ENV BASEDIR /home/ubuntu
 ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
 ENV REF v2.0.0.beta2
-
-ENV FPM_LICENSE MIT
+ENV FPM_NAME "cppcms"
+ENV FPM_DESCRIPTION "High Performance C++ Web Framework"
+ENV FPM_VERSION "2.0.0"
+ENV FPM_ITERATION "1"
+ENV FPM_LICENSE "MIT"
 ENV FPM_VENDOR "Puppeteers_Oy"
 ENV FPM_MAINTAINER "info@puppeteers.net"
 ENV FPM_URL "https://www.puppeteers.net"
-ENV FPM_DESCRIPTION "High Performance C++ Web Framework"
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
