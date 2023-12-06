@@ -26,6 +26,6 @@ ENV FPM_ITERATION "1"
 ENV FPM_LICENSE "BSD-3-Clause"
 ENV FPM_VENDOR "Puppeteers_Oy"
 ENV FPM_MAINTAINER "info@puppeteers.net"
-ENV FPM_URL "https://www.puppeteers.net"
+ENV FPM_URL "https://github.com/zaphoyd/websocketpp"
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]

@@ -27,6 +27,6 @@ ENV FPM_ITERATION "1"
 ENV FPM_LICENSE "MIT"
 ENV FPM_VENDOR "Puppeteers_Oy"
 ENV FPM_MAINTAINER "info@puppeteers.net"
-ENV FPM_URL "https://www.puppeteers.net"
+ENV FPM_URL "https://github.com/aws/aws-sdk-cpp"
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
