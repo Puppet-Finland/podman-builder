@@ -17,6 +17,7 @@ that you can get the build artefacts:
 * [cppcms](https://github.com/artyom-beilis/cppcms)
 * [aws-sdk-cpp](https://github.com/aws/aws-sdk-cpp)
 * [jwt-cpp](https://github.com/Thalhammer/jwt-cpp)
+* [librdkafka](https://github.com/confluentinc/librdkafka.git)
 
 # Supported build platforms
 

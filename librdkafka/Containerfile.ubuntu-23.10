@@ -1,0 +1,33 @@
+# Right now this install Ubuntu 23.10, but will change to 24.04 when that gets
+# released
+FROM docker.io/ubuntu:rolling
+
+WORKDIR /home/ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+    binutils \
+    git \
+    ruby \
+    rubygems
+
+RUN gem install fpm
+
+RUN apt-get install -y build-essential python3
+
+COPY build.sh /home/ubuntu/
+
+ENV BASEDIR /home/ubuntu
+ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
+ENV REF v2.3.0
+ENV FPM_NAME "librdkafka"
+ENV FPM_DESCRIPTION "The Apache Kafka C/C++ client library"
+ENV FPM_VERSION "2.3.0"
+ENV FPM_ITERATION "1"
+ENV FPM_LICENSE "BSD-2-Clause"
+ENV FPM_VENDOR "Puppeteers_Oy"
+ENV FPM_MAINTAINER "info@puppeteers.net"
+ENV FPM_URL "https://www.puppeteers.net"
+
+ENTRYPOINT ["/home/ubuntu/build.sh"]
