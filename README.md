@@ -28,10 +28,8 @@ To build use
 
     ./build.sh <build-directory> <distro>
 
-Where distro can be one of:
-
-* ubuntu-20.04
-* ubuntu-23.10
+The suffices of the Containerfiles tell which distros are supported for each
+project.
 
 Build artefacts can be located from
 

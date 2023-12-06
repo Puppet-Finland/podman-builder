@@ -4,7 +4,6 @@ usage() {
     echo "Usage: build.sh <directory> <distro>"
     echo
     echo "Example: build.sh cppcms ubuntu-23.10"
-    echo "Supported distros: ubuntu-20.04, ubuntu-23.10"
     exit 1
 }
 
@@ -21,10 +20,14 @@ PROJECT=$(echo $1|tr -d "/")
 DISTRO=$2
 
 # Check that distro is supported
-echo $DISTRO|grep -E "^ubuntu-(20.04|23.10)$" > /dev/null 2>&1
+test -f "${PROJECT}/Containerfile.${DISTRO}"
 
 if [ $? -ne 0 ]; then
-    echo "ERROR: unsupported distro ${DISTRO}!"
+    echo "ERROR: unsupported distro ${DISTRO} for project ${PROJECT}!"
+    echo
+    echo "Supported distros are:"
+    ls $PROJECT/Containerfile.*|cut -d "/" -f 2|cut -d "." -f 2-
+    echo
     usage
 fi
 
@@ -33,6 +36,6 @@ fi
 IMAGE="${PROJECT}-${DISTRO}-build"
 CONTAINER="${IMAGE}-instance"
 
-podman build $PROJECT/ -t $IMAGE
+podman build $PROJECT/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
 podman run -it --name $CONTAINER -v podman-builds:/home/ubuntu/output "localhost/$IMAGE"
