@@ -16,6 +16,7 @@ that you can get the build artefacts:
 * [promtotwilio](https://github.com/Swatto/promtotwilio)
 * [cppcms](https://github.com/artyom-beilis/cppcms)
 * [aws-sdk-cpp](https://github.com/aws/aws-sdk-cpp)
+* [jwt-cpp](https://github.com/Thalhammer/jwt-cpp)
 
 # Supported build platforms
 
