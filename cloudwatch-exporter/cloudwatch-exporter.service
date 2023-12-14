@@ -1,0 +1,12 @@
+[Unit]
+Description=CloudWatch Exporter Service
+After=network.target
+
+[Service]
+Environment=AWS_SHARED_CREDENTIALS_FILE="/opt/cloudwatch-exporter/aws_profile"
+Type=simple
+User=cloudwatch
+ExecStart=/usr/bin/java -jar /opt/cloudwatch-exporter/cloudwatch-exporter.jar 9106 /opt/cloudwatch-exporter/config.yaml
+
+[Install]
+WantedBy=multi-user.target
