@@ -20,11 +20,17 @@ that you can get the build artefacts:
 * [jwt-cpp](https://github.com/Thalhammer/jwt-cpp)
 * [date](https://github.com/HowardHinnant/date)
 * [librdkafka](https://github.com/confluentinc/librdkafka.git)
+* kafka-ic (Apache Kafka package by Instaclustr)
 
 # Supported build platforms
 
 * Ubuntu 20.04
 * Ubuntu 23.10
+
+# Prerequisites for building kafka-ic
+
+You must put the Instaclustr-provided tarball into "kafka-ic" directory named
+as "kafka-ic.tar.gz" before initiating a build.
 
 # Building
 
