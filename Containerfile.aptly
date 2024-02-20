@@ -1,0 +1,17 @@
+# Right now this install Ubuntu 23.10, but will change to 24.04 when that gets
+# released
+FROM docker.io/ubuntu:rolling
+
+WORKDIR /home/ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y gnupg2
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A0546A43624A8331
+RUN echo "deb http://repo.aptly.info/ squeeze main" > /etc/apt/sources.list.d/aptly.list
+
+RUN apt-get update && \
+    apt-get install -y aptly
+
+CMD ["/bin/bash"]

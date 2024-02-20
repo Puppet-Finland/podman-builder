@@ -44,3 +44,17 @@ project.
 Build artefacts can be located from
 
     $HOME/.local/share/containers/storage/volumes/podman-builds/_data
+
+# Aptly support
+
+This repository includes support for running [aptly](https://www.aptly.info/),
+the "Swiss army knife for Debian repository management". This is mainly meant
+for testing purposes, though it could be used for production as well.
+
+To build the aptly container image:
+
+    podman build -f Containerfile.aptly -t aptly .
+
+To login interactively to aptly:
+
+    podman run -h aptly -v podman-builds:/home/ubuntu/output -it localhost/aptly
