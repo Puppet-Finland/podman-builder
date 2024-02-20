@@ -14,4 +14,9 @@ RUN echo "deb http://repo.aptly.info/ squeeze main" > /etc/apt/sources.list.d/ap
 RUN apt-get update && \
     apt-get install -y aptly
 
+RUN mkdir /var/lib/aptly
+
+COPY aptly.conf /etc/aptly.conf
+COPY publish-with-aptly.sh /home/ubuntu/publish.sh
+
 CMD ["/bin/bash"]

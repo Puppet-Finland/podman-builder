@@ -58,3 +58,8 @@ To build the aptly container image:
 To login interactively to aptly:
 
     podman run -h aptly -v podman-builds:/home/ubuntu/output -it localhost/aptly
+
+Then to create a repository and publish it inside the container with the
+default (test) settings:
+
+    ./publish.sh
