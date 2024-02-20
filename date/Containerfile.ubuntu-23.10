@@ -30,5 +30,4 @@ ENV FPM_VENDOR "Puppeteers_Oy"
 ENV FPM_MAINTAINER "info@puppeteers.net"
 ENV FPM_URL "https://github.com/HowardHinnant/date"
 
-#ENTRYPOINT ["/home/ubuntu/build.sh"]
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/home/ubuntu/build.sh"]
