@@ -63,3 +63,12 @@ Then to create a repository and publish it inside the container with the
 default (test) settings:
 
     ./publish.sh
+
+The packages will be published to the following locations:
+
+* Ubuntu 22.04 ("jammy")
+    * /home/ubuntu/output/aptly/jammy (container)
+    * $HOME/.local/share/containers/storage/volumes/podman-builds/\_data/aptly/jammy (host)
+* Ubuntu 23.10 ("mantic")
+    * /home/ubuntu/output/aptly/mantic (container)
+    * $HOME/.local/share/containers/storage/volumes/podman-builds/\_data/aptly/mantic (host)
