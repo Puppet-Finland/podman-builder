@@ -18,5 +18,9 @@ RUN mkdir /var/lib/aptly
 
 COPY aptly.conf /etc/aptly.conf
 COPY publish-with-aptly.sh /home/ubuntu/publish.sh
+COPY aptly/private.asc /home/ubuntu/private.asc
+COPY aptly/public.asc /home/ubuntu/public.asc
+RUN gpg --import public.asc
+RUN gpg --batch --import private.asc
 
 CMD ["/bin/bash"]

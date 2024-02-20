@@ -51,6 +51,18 @@ This repository includes support for running [aptly](https://www.aptly.info/),
 the "Swiss army knife for Debian repository management". This is mainly meant
 for testing purposes, though it could be used for production as well.
 
+You need a GnuPG keypair to use aptly. If you don't have one, create it first
+on a real computer (for reliable entropy source):
+
+    gpg --generate-key
+
+Then export the private and public keys:
+
+    gpg --armor --export-secret-keys your-key-fingerprint > private.asc
+    gpgp --armor --export your-key-fingerprint > public.asc
+
+Copy both files to *podman-builds/aptly*.
+
 To build the aptly container image:
 
     podman build -f Containerfile.aptly -t aptly .
@@ -63,6 +75,8 @@ Then to create a repository and publish it inside the container with the
 default (test) settings:
 
     ./publish.sh
+
+This will prompt you for your GnuPG passphrase.
 
 The packages will be published to the following locations:
 
