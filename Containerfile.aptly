@@ -6,7 +6,10 @@ WORKDIR /home/ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y gnupg2 vim
+    apt-get install -y \
+      gnupg2 \
+      vim \
+      ca-certificates
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A0546A43624A8331
 RUN echo "deb http://repo.aptly.info/ squeeze main" > /etc/apt/sources.list.d/aptly.list
