@@ -1,4 +1,4 @@
-FROM docker.io/ubuntu:22.04
+FROM docker.io/ubuntu:24.04
 
 WORKDIR /home/ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,6 +17,6 @@ RUN apt-get install -y build-essential python3 cmake libpcre3-dev zlib1g-dev lib
 COPY build.sh /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-22.04
+ENV OUTPUT /home/ubuntu/output/ubuntu-24.04
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
