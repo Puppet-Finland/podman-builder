@@ -1,4 +1,4 @@
-FROM docker.io/ubuntu:23.10
+FROM docker.io/ubuntu:24.04
 
 WORKDIR /home/ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
@@ -16,7 +16,7 @@ COPY build.sh /home/ubuntu/
 COPY kafka-ic.tar.gz /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
+ENV OUTPUT /home/ubuntu/output/ubuntu-24.04
 ENV BUILD_DIR /home/ubuntu/kafka-ic/kafka_2.11-1.1.1-SNAPSHOT
 ENV REF 2.11
 ENV FPM_NAME "kafka-ic"
