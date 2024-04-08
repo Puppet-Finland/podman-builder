@@ -6,7 +6,7 @@ cd $BASEDIR
 git clone --recurse-submodules --branch $REF https://github.com/aws/aws-sdk-cpp.git 
 cd aws-sdk-cpp
 
-cmake . -DBUILD_ONLY="core;email;s3" -DCMAKE_INSTALL_PREFIX=/home/ubuntu/output/ubuntu-23.10/aws-sdk-cpp/usr/local -DENABLE_TESTING=OFF
+cmake . -DBUILD_ONLY="core;email;s3" -DCMAKE_INSTALL_PREFIX=$OUTPUT/aws-sdk-cpp/usr/local -DENABLE_TESTING=OFF
 make
 make install
 
