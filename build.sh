@@ -31,11 +31,9 @@ if [ $? -ne 0 ]; then
     usage
 fi
 
-# Ubuntu 20.04 (64-bit)
-#
 IMAGE="${PROJECT}-${DISTRO}-build"
 CONTAINER="${IMAGE}-instance"
 
 podman build $PROJECT/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
-podman run -it --name $CONTAINER -v podman-builds:/home/ubuntu/output "localhost/$IMAGE"
+podman run -it --name $CONTAINER --env-file=${PROJECT}/build-defaults.env -v podman-builds:/home/ubuntu/output "localhost/$IMAGE"
