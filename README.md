@@ -24,8 +24,12 @@ that you can get the build artefacts:
 
 # Supported build platforms
 
+Depending on the project one or more of the following operating systems may be
+supported:
+
 * Ubuntu 20.04
 * Ubuntu 23.10
+* Ubuntu 24.04
 
 # Prerequisites for building kafka-ic
 
@@ -94,6 +98,9 @@ The packages will be published to the following locations:
 * Ubuntu 23.10 ("mantic")
     * /home/ubuntu/output/aptly/mantic (container)
     * $HOME/.local/share/containers/storage/volumes/podman-builds/\_data/aptly/mantic (host)
+* Ubuntu 24.04 ("noble")
+    * /home/ubuntu/output/aptly/noble (container)
+    * $HOME/.local/share/containers/storage/volumes/podman-builds/\_data/aptly/noble (host)
 
 ## Publishing to S3
 
@@ -120,19 +127,19 @@ distribution (see [terraform-cloudfront_bucket](https://github.com/Puppet-Finlan
 
 To publish your repository directly (without creating a snapshot) do
 
-    aptly publish repo -distribution="mantic" default_repo_mantic s3:repo.example.org:
+    aptly publish repo -distribution="noble" default_repo_noble s3:repo.example.org:
 
 To add a package:
 
-    aptly repo add default_repo_mantic /home/ubuntu/output/ubuntu-23.10/websocketpp/websocketpp_0.8.2-1_amd64.deb
+    aptly repo add default_repo_noble /home/ubuntu/output/ubuntu-24.04/websocketpp/websocketpp_0.8.2-1_amd64.deb
 
 To remove a package:
 
-    aptly repo remove default_repo_mantic websocketpp
+    aptly repo remove default_repo_noble websocketpp
 
 To publish the updated repository after adding and/or removing packages:
 
-    aptly publish update mantic s3:repo.example.org:
+    aptly publish update noble s3:repo.example.org:
 
 If you have Cloudfront in front of your S3 bucket you will need to invalidate
 the cache whenever you update the repository packages:
