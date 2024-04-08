@@ -18,14 +18,5 @@ COPY build.sh /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
 ENV OUTPUT /home/ubuntu/output/ubuntu-24.04
-ENV REF v2.3.0
-ENV FPM_NAME "librdkafka"
-ENV FPM_DESCRIPTION "The Apache Kafka C/C++ client library"
-ENV FPM_VERSION "2.3.0"
-ENV FPM_ITERATION "1"
-ENV FPM_LICENSE "BSD-2-Clause"
-ENV FPM_VENDOR "Puppeteers_Oy"
-ENV FPM_MAINTAINER "info@puppeteers.net"
-ENV FPM_URL "https://github.com/confluentinc/librdkafka"
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
