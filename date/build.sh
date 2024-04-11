@@ -3,7 +3,7 @@
 # Build cloudwatch-exporter
 cd $BASEDIR
 
-git clone --branch $REF https://github.com/HowardHinnant/date.git
+git clone --branch $REF $GIT_URL
 cd date
 
 g++ -std=c++14 -Wall  -fPIC -O2 -DUSE_OS_TZDB src/*.cpp -c -I include
