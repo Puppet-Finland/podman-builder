@@ -15,6 +15,7 @@ that you can get the build artefacts:
 * [azure-metrics-exporter](https://github.com/webdevops/azure-metrics-exporter.git)
 * [cloudwatch-exporter](https://github.com/prometheus/cloudwatch_exporter)
 * [prometheus](https://prometheus.io/)
+* [alertmanager](https://prometheus.io/)
 * [promtotwilio](https://github.com/Swatto/promtotwilio)
 * [cppcms](https://github.com/artyom-beilis/cppcms)
 * [aws-sdk-cpp](https://github.com/aws/aws-sdk-cpp)
