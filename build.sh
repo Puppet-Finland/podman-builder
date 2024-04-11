@@ -36,4 +36,4 @@ CONTAINER="${IMAGE}-instance"
 
 podman build $PROJECT/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
-podman run -it --name $CONTAINER --env-file=${PROJECT}/build-defaults.env -v podman-builds:/home/ubuntu/output "localhost/$IMAGE"
+podman run -it --name $CONTAINER --env-file=${PROJECT}/build-defaults.env -v podman-builds:/output "localhost/$IMAGE"
