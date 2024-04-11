@@ -1,0 +1,19 @@
+# /etc/systemd/system/blackbox_exporter.service
+[Unit]
+Description=Prometheus blackbox_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=blackbox-exporter
+Group=blackbox-exporter
+
+ExecStart=/opt/blackbox_exporter/blackbox_exporter \
+--config.file=/etc/blackbox_exporter/blackbox-exporter.yaml
+
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
