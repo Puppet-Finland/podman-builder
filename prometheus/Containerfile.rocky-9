@@ -3,7 +3,6 @@ FROM docker.io/rockylinux:9
 WORKDIR /root
 
 RUN dnf -y install \
-golang \
 rpm-build \
 ruby \
 rubygems \
