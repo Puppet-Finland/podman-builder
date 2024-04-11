@@ -28,8 +28,10 @@ Depending on the project one or more of the following operating systems may be
 supported:
 
 * Ubuntu 20.04
+* Ubuntu 22.04
 * Ubuntu 23.10
 * Ubuntu 24.04
+* Rocky Linux 9
 
 # Prerequisites for building kafka-ic
 

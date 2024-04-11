@@ -1,9 +1,13 @@
 #!/bin/sh
 cd $BASEDIR
-git clone -b multiple_receivers https://github.com/Puppet-Finland/promtotwilio.git
+git clone -b multiple_receivers $GIT_URL
 cd promtotwilio
 go build
 
-mkdir -p $OUTPUT
-cp ./promtotwilio $OUTPUT/
-sleep 120
+FPM_TARGET_DIR="${OUTPUT}/promtotwilio"
+mkdir -p $FPM_TARGET_DIR
+mkdir -p $FPM_TARGET_DIR/usr/bin
+
+cp -v promtotwilio $FPM_TARGET_DIR/usr/bin
+
+"${BASEDIR}/package.sh"

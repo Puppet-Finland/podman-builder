@@ -18,6 +18,4 @@ mkdir -p "${UNIT_DIR}"
 cp "${BASEDIR}/cloudwatch-exporter.service" "${UNIT_DIR}/"
 cp "${BASEDIR}/cloudwatch_exporter/target/cloudwatch_exporter-${FPM_VERSION}-jar-with-dependencies.jar" "${BIN_DIR}/cloudwatch_exporter-${FPM_VERSION}.jar"
 
-cd $FPM_TARGET_DIR
-
 "${BASEDIR}/package.sh"
