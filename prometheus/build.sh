@@ -12,6 +12,6 @@ mkdir -p $SYSTEMD_UNIT_DIR
 
 cp -v "${BASEDIR}/prometheus.service" "${SYSTEMD_UNIT_DIR}/"
 cp -v "${BASEDIR}/prometheus.yaml" "${PROMETHEUS_CONFIG_DIR}/"
-wget -q -O- "https://github.com/prometheus/prometheus/releases/download/v${REF}/prometheus-${REF}.linux-amd64.tar.gz"|tar -zx --strip-components=1 -C "${PROMETHEUS_INSTALL_DIR}"
+wget -q -O- "${DOWNLOAD_URL}/v${REF}/prometheus-${REF}.linux-amd64.tar.gz"|tar -zx --strip-components=1 -C "${PROMETHEUS_INSTALL_DIR}"
 
 "${BASEDIR}/package.sh"
