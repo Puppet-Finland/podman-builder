@@ -3,7 +3,7 @@
 # Build cppcms
 cd $BASEDIR
 
-git clone --recurse-submodules --branch $REF https://github.com/aws/aws-sdk-cpp.git 
+git clone --recurse-submodules --branch $REF $GIT_URL
 cd aws-sdk-cpp
 
 cmake . -DBUILD_ONLY="core;email;s3" -DCMAKE_INSTALL_PREFIX=$OUTPUT/aws-sdk-cpp/usr/local -DENABLE_TESTING=OFF
