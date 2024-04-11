@@ -51,6 +51,34 @@ Build artefacts can be located from
 
     $HOME/.local/share/containers/storage/volumes/podman-builds/_data
 
+# Debugging
+
+To extract a Debian package contents use dpkg-deb:
+
+    $ dpkg-deb -e <file>
+
+To extract Debian control files, postinst scripts and all that:
+
+    $ dpkg-deb -x <file> .
+
+To extract an RPM package install *rpmdevtools* and then:
+
+    $ rpmdev-extract <file>
+
+To list files without extracting them:
+
+    $ rpm -qp --list <file>
+
+Then to show postinstall scripts:
+
+    $ rpm -qp --scripts <file>
+
+To show dependencies:
+
+    $ rpm -qp --requires <file>
+
+See "man rpm" for other possible queries.
+
 # Aptly support
 
 This repository includes support for running [aptly](https://www.aptly.info/),
