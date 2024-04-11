@@ -20,6 +20,6 @@ COPY build.sh /home/ubuntu/
 COPY package_ubuntu.sh /home/ubuntu/package.sh
 
 ENV BASEDIR /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
+ENV OUTPUT /output/ubuntu-23.10
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]

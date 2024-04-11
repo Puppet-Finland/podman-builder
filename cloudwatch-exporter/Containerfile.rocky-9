@@ -1,0 +1,23 @@
+FROM docker.io/rockylinux:9
+
+WORKDIR /root
+
+RUN dnf -y install \
+    binutils \
+    git \
+    maven \
+    rpm-build \
+    ruby \
+    rubygems
+
+RUN gem install fpm
+
+COPY cloudwatch-exporter.service /root
+COPY after-install.sh /root
+COPY build.sh /root/
+COPY package_rocky.sh /root/package.sh
+
+ENV BASEDIR /root
+ENV OUTPUT /output/rocky-9
+
+ENTRYPOINT ["/root/build.sh"]
