@@ -3,7 +3,7 @@
 # Package websocketpp
 cd $BASEDIR
 
-git clone --branch $REF https://github.com/zaphoyd/websocketpp.git 
+git clone --branch $REF $GIT_URL
 cd websocketpp
 
 TARGETDIR="${OUTPUT}/websocketpp/usr/local/include"
