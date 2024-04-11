@@ -3,7 +3,7 @@
 # Package jwt-cpp
 cd $BASEDIR
 
-git clone --branch $REF https://github.com/Thalhammer/jwt-cpp.git
+git clone --branch $REF $GIT_URL
 cd jwt-cpp
 
 TARGETDIR="${OUTPUT}/jwt-cpp/usr/local"
