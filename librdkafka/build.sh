@@ -3,7 +3,7 @@
 # Build librdkafka
 cd $BASEDIR
 
-git clone --branch $REF https://github.com/confluentinc/librdkafka.git
+git clone --branch $REF $GIT_URL
 cd librdkafka
 
 ./configure --prefix $OUTPUT/librdkafka/usr/local
