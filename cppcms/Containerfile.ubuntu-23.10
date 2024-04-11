@@ -17,6 +17,6 @@ RUN apt-get install -y build-essential python3 cmake libpcre3-dev zlib1g-dev lib
 COPY build.sh /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
+ENV OUTPUT /output/ubuntu-23.10
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]

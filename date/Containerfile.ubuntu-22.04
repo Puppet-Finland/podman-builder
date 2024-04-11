@@ -3,8 +3,8 @@ FROM docker.io/ubuntu:22.04
 WORKDIR /home/ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV BASEDIR=/home/ubuntu
-ENV OUTPUT=/home/ubuntu/output/ubuntu-22.04
+ENV BASEDIR /home/ubuntu
+ENV OUTPUT /output/ubuntu-22.04
 
 RUN apt-get update && \
     apt-get install -y \

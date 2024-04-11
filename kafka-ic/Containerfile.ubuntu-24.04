@@ -16,6 +16,6 @@ COPY build.sh /home/ubuntu/
 COPY kafka-ic.tar.gz /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-24.04
+ENV OUTPUT /output/ubuntu-24.04
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
