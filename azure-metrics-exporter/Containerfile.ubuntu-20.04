@@ -16,12 +16,8 @@ RUN mv go /usr/local
 # golang-go \
 COPY build.sh /home/ubuntu/
 
-ENV GOOS linux
-ENV GOARCH amd64
-ENV GOROOT /usr/local/go
 ENV BASEDIR /home/ubuntu
 ENV GOPATH /home/ubuntu
-ENV OUTPUT /home/ubuntu/output/ubuntu-20.04
-ENV PATH /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/go/bin
+ENV OUTPUT /output/ubuntu-20.04
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]

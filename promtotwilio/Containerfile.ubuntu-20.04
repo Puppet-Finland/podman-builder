@@ -13,15 +13,10 @@ RUN wget --quiet https://go.dev/dl/go1.19.linux-amd64.tar.gz
 RUN tar -zxf go1.19.linux-amd64.tar.gz
 RUN mv go /usr/local 
 
-# golang-go \
 COPY build.sh /home/ubuntu/
 
-ENV GOOS linux
-ENV GOARCH amd64
-ENV GOROOT /usr/local/go
 ENV BASEDIR /home/ubuntu
 ENV GOPATH /home/ubuntu
 ENV OUTPUT /home/ubuntu/output/ubuntu-20.04
-ENV PATH /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/go/bin
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
