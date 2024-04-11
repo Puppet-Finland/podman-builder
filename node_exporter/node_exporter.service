@@ -1,0 +1,19 @@
+# /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Prometheus node_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node-exporter
+Group=node-exporter
+
+ExecStart=/opt/node_exporter/node_exporter \
+--collector.systemd
+
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
