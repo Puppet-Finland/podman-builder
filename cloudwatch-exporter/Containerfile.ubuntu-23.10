@@ -17,6 +17,7 @@ RUN apt-get install -y maven
 COPY cloudwatch-exporter.service /home/ubuntu
 COPY after-install.sh /home/ubuntu
 COPY build.sh /home/ubuntu/
+COPY package_ubuntu.sh /home/ubuntu/package.sh
 
 ENV BASEDIR /home/ubuntu
 ENV OUTPUT /home/ubuntu/output/ubuntu-23.10
