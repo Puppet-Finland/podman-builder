@@ -3,7 +3,7 @@
 # Build cppcms
 cd $BASEDIR
 
-git clone --branch $REF https://github.com/artyom-beilis/cppcms.git
+git clone --branch $REF $GIT_URL
 cd cppcms
 
 cmake . -DCMAKE_INSTALL_PREFIX=$OUTPUT/cppcms/usr/local
