@@ -70,7 +70,11 @@ To list files without extracting them:
 
     $ rpm -qp --list <file>
 
-Then to show postinstall scripts:
+To list config files:
+
+    $ rpm -qp --configfiles <file>
+
+Then to show scripts:
 
     $ rpm -qp --scripts <file>
 
