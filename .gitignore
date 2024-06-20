@@ -1,3 +1,4 @@
 /kafka-ic/kafka-ic.tar.gz
 *.swp
 aptly/*.asc
+build-customizations.env

@@ -34,6 +34,12 @@ fi
 IMAGE="${PROJECT}-${DISTRO}-build"
 CONTAINER="${IMAGE}-instance"
 
+if [ -r "${PROJECT}/build-customizations.env" ]; then
+    CUSTOM_ENV_FILE_PARAM="--env-file=${PROJECT}/build-customizations.env"
+else
+    CUSTOM_ENV_FILE_PARAM=""
+fi
+
 podman build $PROJECT/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
-podman run -it --name $CONTAINER --env-file=${PROJECT}/build-defaults.env -v podman-builds:/output "localhost/$IMAGE"
+podman run -it --name $CONTAINER --env-file=${PROJECT}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output "localhost/$IMAGE"

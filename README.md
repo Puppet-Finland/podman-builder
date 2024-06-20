@@ -55,6 +55,13 @@ Build artefacts can be located from
 
     $HOME/.local/share/containers/storage/volumes/podman-builds/_data
 
+# Customizing build parameters outside of Git
+
+To customize a build's environment variables outside of Git (e.g. for CI/CD)
+add a file *build-customizations.env* to the project directory next to
+*build-defaults.env*. Any values found in *build-customizations.env* will be
+used and preferred over the defaults.
+
 # Debugging
 
 To extract a Debian package contents use dpkg-deb:
