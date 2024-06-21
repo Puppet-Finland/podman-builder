@@ -23,7 +23,8 @@ that you can get the build artefacts:
 * [aws-sdk-cpp](https://github.com/aws/aws-sdk-cpp)
 * [jwt-cpp](https://github.com/Thalhammer/jwt-cpp)
 * [date](https://github.com/HowardHinnant/date)
-* [librdkafka](https://github.com/confluentinc/librdkafka.git)
+* [librdkafka](https://github.com/confluentinc/librdkafka)
+* [cpp-driver](https://github.com/datastax/cpp-driver)
 * kafka-ic (Apache Kafka package by Instaclustr)
 
 # Supported build platforms
