@@ -41,6 +41,17 @@ else
     CUSTOM_ENV_FILE_PARAM=""
 fi
 
+# Copy SSH files to the build context
+for p in PODMAN_BUILDER_SSH_KEY_PATH PODMAN_BUILDER_SSH_CONFIG PODMAN_BUILDER_SSH_KNOWN_HOSTS; do
+    eval current_path=\"\$$p\"
+
+    if ! [ "${current_path}" = "" ] && [ -r "${current_path}" ]; then
+        cp -uv "${current_path}" "${PROJECT_DIR}/"
+    else
+        echo "NOTICE: environment variable ${p} not set! This is only a problem if project ${PROJECT} requires using Git over SSH!"
+    fi
+done
+
 podman build $PROJECT_DIR/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
 podman run -it --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output "localhost/$IMAGE"

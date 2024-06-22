@@ -43,6 +43,29 @@ supported:
 You must put the Instaclustr-provided tarball into "kafka-ic" directory named
 as "kafka-ic.tar.gz" before initiating a build.
 
+# Using private Git repositories through SSH
+
+Podman-builder supports private Git repositories accessible through SSH. You
+need to define environment variables on the build host that tell where to find
+the SSH private key, SSH client configuration file and known\_hosts file.
+
+    PODMAN_BUILDER_SSH_KEY_PATH=/home/john/.ssh/acme-podman-builder/ssh-deployment-key
+    PODMAN_BUILDER_SSH_KNOWN_HOSTS=/home/john/.ssh/acme-podman-builder/ssh-known_hosts
+    PODMAN_BUILDER_SSH_CONFIG=/home/john/.ssh/acme-podman-builder/ssh-config
+
+The build.sh script automatically copies these files as-is to the project's
+build context. It is up to the Containerfile to copy these into correct places
+on the container image. For example:
+
+    RUN mkdir -p /root/.ssh
+    RUN chmod 700 /root/.ssh
+    COPY --chown=root:root --chmod=0700 ssh-deployment-key /root/.ssh/ssh-deployment-key
+    COPY --chown=root:root --chmod=0644 ssh-config /root/.ssh/config
+    COPY --chown=root:root --chmod=0600 ssh-known_hosts /root/.ssh/known_hosts
+
+Once these steps have been done correctly cloning from private Git repositories
+should be possible.
+
 # Building
 
 To build use
