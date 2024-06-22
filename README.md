@@ -54,8 +54,12 @@ the SSH private key, SSH client configuration file and known\_hosts file.
     PODMAN_BUILDER_SSH_CONFIG=/home/john/.ssh/acme-podman-builder/ssh-config
 
 The build.sh script automatically copies these files as-is to the project's
-build context. It is up to the Containerfile to copy these into correct places
-on the container image. For example:
+build context *if* build-defaults.env contains this line:
+
+    CLONE_WITH_SSH=yes
+
+It is up to the Containerfile to copy these into correct places in the
+container image. For example:
 
     RUN mkdir -p /root/.ssh
     RUN chmod 700 /root/.ssh
