@@ -15,6 +15,7 @@ RUN gem install fpm
 RUN apt-get install -y build-essential python3
 
 COPY build.sh /home/ubuntu/
+COPY after-install.sh /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
 ENV OUTPUT /output/ubuntu-24.04

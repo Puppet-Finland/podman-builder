@@ -26,4 +26,5 @@ fpm \
   -d 'libssl3 >= 3.0.0 '\
   -d 'libuv1t64 >= 1.48.0' \
   -d 'zlib1g >= 1.0' \
+  --after-install "${BASEDIR}/after-install.sh" \
   -s dir .
