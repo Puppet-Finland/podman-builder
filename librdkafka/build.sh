@@ -2,7 +2,7 @@
 #
 # Remove traces of the old staging directory
 if ! [ -z "${OUTPUT}" ]; then
-    rm -rf $OUTPUT/usr
+    rm -rf $OUTPUT/librdkafka/usr
 fi
 
 # Build librdkafka
