@@ -1,5 +1,10 @@
 #!/bin/sh
 #
+# Remove traces of the old staging directory
+if ! [ -z "${OUTPUT}" ]; then
+    rm -rf $OUTPUT/usr
+fi
+
 # Build librdkafka
 cd $BASEDIR
 
