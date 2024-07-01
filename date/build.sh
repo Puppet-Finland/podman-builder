@@ -6,8 +6,8 @@ cd $BASEDIR
 git clone --branch $REF $GIT_URL
 cd date
 
-g++ -std=c++14 -Wall  -fPIC -O2 -DUSE_OS_TZDB src/*.cpp -c -I include
-g++ -std=c++14 -shared -o libdate.so *.o
+g++ -std=c++17 -Wall  -fPIC -O2 -DUSE_OS_TZDB src/*.cpp -c -I include
+g++ -std=c++17 -shared -o libdate.so *.o
 
 FPM_TARGET_DIR="${OUTPUT}/date"
 LIB_DIR="${FPM_TARGET_DIR}/usr/local/lib"
@@ -21,4 +21,16 @@ cp include/date/* "${INCLUDE_DIR}/"
 
 cd $FPM_TARGET_DIR
 
-fpm -t deb --force --name "${FPM_NAME}" --description "${FPM_DESCRIPTION}" --license "${FPM_LICENSE}" --vendor "${FPM_VENDOR}" --maintainer "${FPM_MAINTAINER}" --url "${FPM_URL}" --version "${FPM_VERSION}" --iteration "${FPM_ITERATION}" -s dir .
+fpm \
+  -t deb \
+  --force \
+  --name "${FPM_NAME}" \
+  --description "${FPM_DESCRIPTION}" \
+  --license "${FPM_LICENSE}" \
+  --vendor "${FPM_VENDOR}" \
+  --maintainer "${FPM_MAINTAINER}" \
+  --url "${FPM_URL}" \
+  --version "${FPM_VERSION}" \
+  --iteration "${FPM_ITERATION}" \
+  --after-install "${BASEDIR}/after-install.sh" \
+  -s dir .

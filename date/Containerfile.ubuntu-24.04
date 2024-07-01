@@ -18,5 +18,6 @@ RUN gem install fpm
 RUN apt-get install -y build-essential
 
 COPY build.sh /home/ubuntu/
+COPY after-install.sh /home/ubuntu/
 
 ENTRYPOINT ["/home/ubuntu/build.sh"]
