@@ -56,4 +56,10 @@ fi
 
 podman build $PROJECT_DIR/ -f "Containerfile.${DISTRO}" -t $IMAGE
 podman container rm $CONTAINER
-podman run -it --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output "localhost/$IMAGE"
+
+# Check if the system is using selinux. If yes, we need to add the "z"
+# parameter to the volume mount or writing output files will fail.
+VOLUME_OPTIONS=""
+getenforce && VOLUME_OPTIONS=":z"
+
+podman run -it --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
