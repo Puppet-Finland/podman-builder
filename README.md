@@ -74,10 +74,13 @@ should be possible.
 
 To build use
 
-    ./build.sh <build-directory> <distro>
+    ./build.sh -p <build-directory> -o <distro>
 
 The suffices of the Containerfiles tell which distros are supported for each
-project.
+project. If you want to rebuild the build container image from scratch add the
+-n (=no cache) option:
+
+    ./build.sh -p <build-directory> -o <distro> -n
 
 Build artefacts can be located from
 

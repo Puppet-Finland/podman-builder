@@ -1,30 +1,67 @@
 #!/bin/sh
 
 usage() {
-    echo "Usage: build.sh <directory> <distro>"
+    echo "Usage: build.sh -p <project-directory> -o <operating system> [-n]"
     echo
-    echo "Example: build.sh cppcms ubuntu-23.10"
+    echo "Parameters:"
+    echo "  -p: the project's build directory"
+    echo "  -o: operating system to build for; Containerfile.<os> needs to be present in the project directory"
+    echo "  -n: rebuild container image from scratch (passes --no-cache to podman build)"
+    echo
+    echo "Example:"
+    echo "  build.sh -p cppcms -o ubuntu-24.04"
+    echo
     exit 1
 }
 
-if [ "$1" = "" ] || [ "$2" = "" ]; then
-    usage
+NO_CACHE="no"
+PROJECT_DIR=""
+OS=""
+
+while getopts "p:o:n" o; do
+    case "${o}" in
+        p)
+            PROJECT_DIR=${OPTARG}
+            ;;
+        o)  OS=${OPTARG}
+            ;;
+        n)  NO_CACHE="yes"
+            ;;
+        h)  usage
+            ;;
+        *)  usage
+            ;;
+    esac
+done
+
+PARAMS_DEFINED="yes"
+
+if [ "${PROJECT_DIR}" = "" ]; then
+    echo "ERROR: must pass project directory with the -p argument "
+    PARAMS_DEFINED="no"
 fi
 
-PROJECT_DIR=$1
-if ! [ -d "${1}" ]; then
-    echo "ERROR: build directory ${1} not found!"
+if [ "${OS}" = "" ]; then
+    echo "ERROR: must pass operating system version with the -o argument "
+    PARAMS_DEFINED="no"
+fi
+
+if [ "${PARAMS_DEFINED}" = "no" ]; then
     exit 1
 fi
 
-PROJECT=$(basename $1)
-DISTRO=$2
+if ! [ -d "${PROJECT_DIR}" ]; then
+    echo "ERROR: build directory ${PROJECT_DIR} not found!"
+    exit 1
+fi
+
+PROJECT=$(basename $PROJECT_DIR)
 
 # Check that distro is supported
-test -f "${PROJECT_DIR}/Containerfile.${DISTRO}"
+test -f "${PROJECT_DIR}/Containerfile.${OS}"
 
 if [ $? -ne 0 ]; then
-    echo "ERROR: unsupported distro ${DISTRO} for project ${PROJECT}!"
+    echo "ERROR: unsupported operating system ${OS} for project ${PROJECT}!"
     echo
     echo "Supported distros are:"
     ls $PROJECT_DIR/Containerfile.*|cut -d "/" -f 2|cut -d "." -f 2-
@@ -32,7 +69,7 @@ if [ $? -ne 0 ]; then
     usage
 fi
 
-IMAGE="${PROJECT}-${DISTRO}-build"
+IMAGE="${PROJECT}-${OS}-build"
 CONTAINER="${IMAGE}-instance"
 
 if [ -r "${PROJECT_DIR}/build-customizations.env" ]; then
@@ -54,12 +91,16 @@ if grep "CLONE_WITH_SSH=yes" "${PROJECT_DIR}/build-defaults.env"; then
     done
 fi
 
-podman build $PROJECT_DIR/ -f "Containerfile.${DISTRO}" -t $IMAGE
+if [ "${NO_CACHE}" = "yes" ]; then
+    EXTRA_BUILD_PARAMS="--no-cache"
+fi
+
+podman build $PROJECT_DIR/ $EXTRA_BUILD_PARAMS -f "Containerfile.${OS}" -t $IMAGE || exit 1
 podman container rm $CONTAINER
 
 # Check if the system is using selinux. If yes, we need to add the "z"
 # parameter to the volume mount or writing output files will fail.
 VOLUME_OPTIONS=""
-getenforce && VOLUME_OPTIONS=":z"
+getenforce > /dev/null 2>&1 && VOLUME_OPTIONS=":z"
 
 podman run -it --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
