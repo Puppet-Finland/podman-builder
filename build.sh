@@ -103,4 +103,4 @@ podman container rm $CONTAINER
 VOLUME_OPTIONS=""
 getenforce > /dev/null 2>&1 && VOLUME_OPTIONS=":z"
 
-podman run -it --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
+podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
