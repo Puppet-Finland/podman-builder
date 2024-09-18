@@ -13,7 +13,11 @@ RUN dnf -y install \
 RUN gem install fpm
 
 COPY cloudwatch-exporter.service /root
+COPY aws_profile /root
+COPY config.yaml /root
 COPY after-install.sh /root
+COPY before-remove.sh /root
+COPY after-remove.sh /root
 COPY build.sh /root/
 COPY package_rocky.sh /root/package.sh
 

@@ -1,0 +1,3 @@
+# Sample AWS profile file for cloudwatch-exporter
+aws_access_key_id=FIXME
+aws_secret_access_key=FIXME

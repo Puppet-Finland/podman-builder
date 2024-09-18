@@ -15,7 +15,11 @@ RUN gem install fpm
 RUN apt-get install -y maven
 
 COPY cloudwatch-exporter.service /home/ubuntu
+COPY aws_profile /home/ubuntu
+COPY config.yaml /home/ubuntu
 COPY after-install.sh /home/ubuntu
+COPY before-remove.sh /home/ubuntu
+COPY after-remove.sh /home/ubuntu
 COPY build.sh /home/ubuntu/
 COPY package_ubuntu.sh /home/ubuntu/package.sh
 

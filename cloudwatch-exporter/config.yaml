@@ -1,0 +1,6 @@
+# Sample configuration file for cloudwatch-exporter. See
+# https://github.com/prometheus/cloudwatch_exporter for details.
+#
+---
+region: FIXME
+metrics:  FIXME

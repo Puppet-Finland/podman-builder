@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-FPM_TARGET_DIR="${OUTPUT}/cloudwatch_exporter/target"
+FPM_TARGET_DIR="${OUTPUT}/cloudwatch-exporter/target"
 
 cd $FPM_TARGET_DIR
 
-fpm -t rpm --force --name "${FPM_NAME}" --description "${FPM_DESCRIPTION}" --license "${FPM_LICENSE}" --vendor "${FPM_VENDOR}" --maintainer "${FPM_MAINTAINER}" --url "${FPM_URL}" --version "${FPM_VERSION}" --iteration "${FPM_ITERATION}" --after-install "${BASEDIR}/after-install.sh" -d "java-11-openjdk" -s dir .
+fpm -t rpm --force --name "${FPM_NAME}" --description "${FPM_DESCRIPTION}" --license "${FPM_LICENSE}" --vendor "${FPM_VENDOR}" --maintainer "${FPM_MAINTAINER}" --url "${FPM_URL}" --version "${FPM_VERSION}" --iteration "${FPM_ITERATION}" --after-install "${BASEDIR}/after-install.sh" --before-remove "${BASEDIR}/before-remove.sh" --after-remove "${BASEDIR}/after-remove.sh" -d "java-11-openjdk" --config-files etc/cloudwatch-exporter -s dir .
