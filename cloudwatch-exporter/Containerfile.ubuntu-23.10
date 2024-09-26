@@ -18,6 +18,7 @@ COPY cloudwatch-exporter.service /home/ubuntu
 COPY aws_profile /home/ubuntu
 COPY config.yaml /home/ubuntu
 COPY after-install.sh /home/ubuntu
+COPY after-upgrade.sh /home/ubuntu
 COPY before-remove.sh /home/ubuntu
 COPY after-remove.sh /home/ubuntu
 COPY build.sh /home/ubuntu/

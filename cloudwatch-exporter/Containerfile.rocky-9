@@ -16,6 +16,7 @@ COPY cloudwatch-exporter.service /root
 COPY aws_profile /root
 COPY config.yaml /root
 COPY after-install.sh /root
+COPY after-upgrade.sh /root
 COPY before-remove.sh /root
 COPY after-remove.sh /root
 COPY build.sh /root/
