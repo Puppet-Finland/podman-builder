@@ -16,6 +16,10 @@ RUN wget --quiet https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
 RUN tar -zxf go1.23.2.linux-amd64.tar.gz
 RUN mv go /usr/local
 
+COPY after-install.sh /root
+COPY after-upgrade.sh /root
+COPY azure_metrics_exporter.service /root
+COPY azure-metrics-exporter.env /root
 COPY build.sh /root
 COPY package_rocky.sh /root/package.sh
 

@@ -1,0 +1,17 @@
+[Unit]
+Description=Azure Metrics Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=azure-metrics-exporter
+Group=azure-metrics-exporter
+ExecStart=/usr/local/bin/azure-metrics-exporter \
+--server.bind=:8080 \
+--enable-caching
+EnvironmentFile=/etc/azure-metrics-exporter/azure-metrics-exporter.env
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
