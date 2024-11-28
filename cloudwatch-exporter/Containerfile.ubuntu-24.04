@@ -1,0 +1,30 @@
+FROM docker.io/ubuntu:24.04
+
+WORKDIR /home/ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+    binutils \
+    git \
+    maven \
+    default-jdk \
+    ruby \
+    rubygems
+
+RUN gem install fpm
+
+COPY cloudwatch-exporter.service /home/ubuntu
+COPY aws_profile /home/ubuntu
+COPY config.yaml /home/ubuntu
+COPY after-install.sh /home/ubuntu
+COPY after-upgrade.sh /home/ubuntu
+COPY before-remove.sh /home/ubuntu
+COPY after-remove.sh /home/ubuntu
+COPY build.sh /home/ubuntu/
+COPY package_ubuntu.sh /home/ubuntu/package.sh
+
+ENV BASEDIR /home/ubuntu
+ENV OUTPUT /output/ubuntu-24.04
+
+ENTRYPOINT ["/home/ubuntu/build.sh"]
