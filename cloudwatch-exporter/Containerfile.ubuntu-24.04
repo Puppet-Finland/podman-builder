@@ -8,7 +8,7 @@ RUN apt-get update && \
     binutils \
     git \
     maven \
-    default-jdk \
+    openjdk-21-jdk \
     ruby \
     rubygems
 
