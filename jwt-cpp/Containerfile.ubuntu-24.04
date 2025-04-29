@@ -13,6 +13,7 @@ RUN apt-get update && \
 RUN gem install fpm
 
 COPY build.sh /home/ubuntu/
+COPY picojson.patch /home/ubuntu/
 
 ENV BASEDIR /home/ubuntu
 ENV OUTPUT /output/ubuntu-24.04

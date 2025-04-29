@@ -3,9 +3,10 @@
 # Package jwt-cpp
 cd $BASEDIR
 
-git clone --branch $REF $GIT_URL
+git clone $GIT_URL
 cd jwt-cpp
-
+git checkout $REF
+patch -p1 < /home/ubuntu/picojson.patch
 TARGETDIR="${OUTPUT}/jwt-cpp/usr/local"
 
 mkdir -p $TARGETDIR
