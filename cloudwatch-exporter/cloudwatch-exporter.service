@@ -3,7 +3,8 @@ Description=CloudWatch Exporter Service
 After=network.target
 
 [Service]
-Environment=AWS_PROFILE="/etc/cloudwatch-exporter/aws_profile"
+Environment=AWS_PROFILE="cloudwatch"
+Environment=AWS_SHARED_CREDENTIALS_FILE="/etc/cloudwatch-exporter/aws_credentials_file"
 Type=simple
 User=cloudwatch
 ExecStart=/usr/bin/java -jar /usr/local/bin/cloudwatch-exporter.jar 9106 /etc/cloudwatch-exporter/config.yaml

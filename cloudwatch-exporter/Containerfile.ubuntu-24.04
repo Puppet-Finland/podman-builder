@@ -15,7 +15,7 @@ RUN apt-get update && \
 RUN gem install fpm
 
 COPY cloudwatch-exporter.service /home/ubuntu
-COPY aws_profile /home/ubuntu
+COPY aws_credentials_file /root
 COPY config.yaml /home/ubuntu
 COPY after-install.sh /home/ubuntu
 COPY after-upgrade.sh /home/ubuntu
