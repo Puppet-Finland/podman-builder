@@ -1,0 +1,20 @@
+diff --git a/include/jwt-cpp/picojson.h b/include/jwt-cpp/picojson.h
+index 24a60c5..6b76aef 100644
+--- a/include/jwt-cpp/picojson.h
++++ b/include/jwt-cpp/picojson.h
+@@ -377,7 +377,7 @@ GET(array, *u_.array_)
+ GET(object, *u_.object_)
+ #ifdef PICOJSON_USE_INT64
+ GET(double,
+-    (type_ == int64_type && (const_cast<value *>(this)->type_ = number_type, const_cast<value *>(this)->u_.number_ = u_.int64_),
++    ((type_ == int64_type) && ((const_cast<value *>(this)->type_ = number_type), (const_cast<value *>(this)->u_.number_ = u_.int64_)),
+      u_.number_))
+ GET(int64_t, u_.int64_)
+ #else
+@@ -1165,4 +1165,4 @@ inline std::ostream &operator<<(std::ostream &os, const picojson::value &x) {
+ #pragma warning(pop)
+ #endif
+
+-#endif
+\ No newline at end of file
++#endif
