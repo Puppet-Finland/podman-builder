@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Build cppcms
+set -e
 cd $BASEDIR
 
 git clone --branch $REF $GIT_URL
