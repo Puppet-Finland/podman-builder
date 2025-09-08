@@ -37,6 +37,7 @@ supported:
 * Ubuntu 23.10
 * Ubuntu 24.04
 * Rocky Linux 9
+* Rocky Linux 10
 
 # Prerequisites for building kafka-ic
 
