@@ -1,0 +1,11 @@
+[Unit]
+Description=Prometheus Updates Exporter service
+After=network.target
+
+[Service]
+Type=simple
+User=updates-exporter
+ExecStart=/usr/local/bin/updates-exporter
+
+[Install]
+WantedBy=multi-user.target

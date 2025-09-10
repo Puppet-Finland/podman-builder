@@ -1,0 +1,26 @@
+FROM docker.io/rockylinux/rockylinux:10
+
+WORKDIR /root
+
+RUN dnf -y install \
+git \
+golang \
+make \
+rpm-build \
+ruby \
+rubygems \
+time \
+wget
+
+RUN gem install fpm
+
+COPY after-install.sh /root
+COPY after-upgrade.sh /root
+COPY build.sh /root
+COPY updates-exporter.service /root
+COPY package_rocky.sh /root/package.sh
+
+ENV BASEDIR /root
+ENV OUTPUT /output/rocky-10
+
+ENTRYPOINT ["/root/build.sh"]
