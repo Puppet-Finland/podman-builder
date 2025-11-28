@@ -10,6 +10,8 @@ that you can get the build artefacts:
 
     $ podman volume create podman-builds
 
+You also need to have [jq](https://jqlang.org/) installed.
+
 # Supported projects
 
 * [azure-metrics-exporter](https://github.com/webdevops/azure-metrics-exporter.git)
@@ -83,6 +85,12 @@ project. If you want to rebuild the build container image from scratch add the
 -n (=no cache) option:
 
     ./build.sh -p <build-directory> -o <distro> -n
+
+If you wish to just build the build container, use the -c ("container only") option:
+
+    ./build.sh -p <build-directory> -o <distro> -c
+
+This can be useful when building container images instead of applications.
 
 Build artefacts can be located from
 

@@ -7,6 +7,7 @@ usage() {
     echo "  -p: the project's build directory"
     echo "  -o: operating system to build for; Containerfile.<os> needs to be present in the project directory"
     echo "  -n: rebuild container image from scratch (passes --no-cache to podman build)"
+    echo "  -c: build the build container only: do not trigger the software build"
     echo
     echo "Example:"
     echo "  build.sh -p cppcms -o ubuntu-24.04"
@@ -15,10 +16,11 @@ usage() {
 }
 
 NO_CACHE="no"
+CONTAINER_ONLY="no"
 PROJECT_DIR=""
 OS=""
 
-while getopts "p:o:n" o; do
+while getopts "p:o:nc" o; do
     case "${o}" in
         p)
             PROJECT_DIR=${OPTARG}
@@ -26,6 +28,8 @@ while getopts "p:o:n" o; do
         o)  OS=${OPTARG}
             ;;
         n)  NO_CACHE="yes"
+            ;;
+        c)  CONTAINER_ONLY="yes"
             ;;
         h)  usage
             ;;
@@ -95,12 +99,18 @@ if [ "${NO_CACHE}" = "yes" ]; then
     EXTRA_BUILD_PARAMS="--no-cache"
 fi
 
-podman build $PROJECT_DIR/ $EXTRA_BUILD_PARAMS -f "Containerfile.${OS}" -t $IMAGE || exit 1
-podman container rm $CONTAINER
+# Get the path to the podman-builds volume. This is used by build types that
+# consume the results of other build types (e.g. container builds).
+VOLUME_PATH=$(podman inspect podman-builds|jq '.[0]["Mountpoint"]'|tr -d "\"")
 
 # Check if the system is using selinux. If yes, we need to add the "z"
 # parameter to the volume mount or writing output files will fail.
 VOLUME_OPTIONS=""
 getenforce > /dev/null 2>&1 && VOLUME_OPTIONS=":z"
 
-podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
+podman build $PROJECT_DIR/ $EXTRA_BUILD_PARAMS -v $VOLUME_PATH:/output$VOLUME_OPTIONS -f "Containerfile.${OS}" -t $IMAGE || exit 1
+podman container rm $CONTAINER
+
+if [ "${CONTAINER_ONLY}" != "yes" ]; then
+    podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
+fi
