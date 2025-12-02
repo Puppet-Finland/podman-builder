@@ -109,6 +109,10 @@ You can use the `-a <path-to-script>` parameter to run a script on the build
 host after the build has finished. This can be useful for things like pushing
 packages to a dnf or apt repository or pushing container images to a registry.
 
+Also, if the project directory contains a *after.sh* script that will
+automatically run after the build has finished. Note that if you specify a
+script with `-a <path-to-script>` then the project's after.sh will not run.
+
 # Debugging
 
 To extract a Debian package contents use dpkg-deb:

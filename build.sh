@@ -7,8 +7,8 @@ usage() {
     echo "  -p: the project's build directory"
     echo "  -o: operating system to build for; Containerfile.<os> needs to be present in the project directory"
     echo "  -n: rebuild container image from scratch (passes --no-cache to podman build)"
-    echo "  -c: build the build container only: do not trigger the software build"
-    echo "  -a: run this script on the host after the build has finished"
+    echo "  -c: force building the container only (do not trigger the software build)"
+    echo "  -a: force the given script to run on the host after the build has finished"
     echo
     echo "Example:"
     echo "  build.sh -p cppcms -o ubuntu-24.04"
@@ -118,8 +118,10 @@ if [ "${CONTAINER_ONLY}" != "yes" ]; then
     podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
 fi
 
+# Run the "after" script defined with "-a" parameter, if defined. Otherwise try
+# to run the project's default "after" script.
 if [ "${AFTER_SCRIPT}" != "" ]; then
-    if [ -x "${AFTER_SCRIPT}" ]; then
-        "${AFTER_SCRIPT}"
-    fi
+    test -x "${AFTER_SCRIPT}" && "${AFTER_SCRIPT}"
+else
+    test -x "${PROJECT_DIR}/after.sh" && "${PROJECT_DIR}/after.sh"
 fi
