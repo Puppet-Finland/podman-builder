@@ -64,7 +64,7 @@ fi
 
 # If we're not forced to do a container-only build, then check if project is
 # defined as a container-only.
-if [ "${CONTAINER_ONLY}" == "" ]; then
+if [ "${CONTAINER_ONLY}" = "" ]; then
     CONTAINER_ONLY=$(. "${PROJECT_DIR}/build-defaults.env" ; echo $CONTAINER_ONLY)
 fi
 
