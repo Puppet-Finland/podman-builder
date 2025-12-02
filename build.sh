@@ -111,7 +111,7 @@ VOLUME_PATH=$(podman inspect podman-builds|jq '.[0]["Mountpoint"]'|tr -d "\"")
 VOLUME_OPTIONS=""
 getenforce > /dev/null 2>&1 && VOLUME_OPTIONS=":z"
 
-podman build $PROJECT_DIR/ $EXTRA_BUILD_PARAMS -v $VOLUME_PATH:/output$VOLUME_OPTIONS -f "Containerfile.${OS}" -t $IMAGE || exit 1
+podman build $PROJECT_DIR/ $EXTRA_BUILD_PARAMS --build-arg-file=$PROJECT_DIR/build-defaults.env -v $VOLUME_PATH:/output$VOLUME_OPTIONS -f "Containerfile.${OS}" -t $IMAGE || exit 1
 podman container rm $CONTAINER
 
 if [ "${CONTAINER_ONLY}" != "yes" ]; then
