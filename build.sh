@@ -1,13 +1,14 @@
 #!/bin/sh
 
 usage() {
-    echo "Usage: build.sh -p <project-directory> -o <operating system> [-n]"
+    echo "Usage: build.sh -p <project-directory> -o <operating system> [-n] [-a <after script>]"
     echo
     echo "Parameters:"
     echo "  -p: the project's build directory"
     echo "  -o: operating system to build for; Containerfile.<os> needs to be present in the project directory"
     echo "  -n: rebuild container image from scratch (passes --no-cache to podman build)"
     echo "  -c: build the build container only: do not trigger the software build"
+    echo "  -a: run this script on the host after the build has finished"
     echo
     echo "Example:"
     echo "  build.sh -p cppcms -o ubuntu-24.04"
@@ -18,14 +19,16 @@ usage() {
 NO_CACHE="no"
 CONTAINER_ONLY="no"
 PROJECT_DIR=""
+AFTER_SCRIPT=""
 OS=""
 
-while getopts "p:o:nc" o; do
+while getopts "p:o:a:nc" o; do
     case "${o}" in
-        p)
-            PROJECT_DIR=${OPTARG}
+        p)  PROJECT_DIR=${OPTARG}
             ;;
         o)  OS=${OPTARG}
+            ;;
+        a)  AFTER_SCRIPT=${OPTARG}
             ;;
         n)  NO_CACHE="yes"
             ;;
@@ -113,4 +116,10 @@ podman container rm $CONTAINER
 
 if [ "${CONTAINER_ONLY}" != "yes" ]; then
     podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
+fi
+
+if [ "${AFTER_SCRIPT}" != "" ]; then
+    if [ -x "${AFTER_SCRIPT}" ]; then
+        "${AFTER_SCRIPT}"
+    fi
 fi

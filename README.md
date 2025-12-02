@@ -103,6 +103,12 @@ add a file *build-customizations.env* to the project directory next to
 *build-defaults.env*. Any values found in *build-customizations.env* will be
 used and preferred over the defaults.
 
+# Running after-install scripts on the host
+
+You can use the `-a <path-to-script>` parameter to run a script on the build
+host after the build has finished. This can be useful for things like pushing
+packages to a dnf or apt repository or pushing container images to a registry.
+
 # Debugging
 
 To extract a Debian package contents use dpkg-deb:
