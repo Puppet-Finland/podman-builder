@@ -90,6 +90,9 @@ If you wish to just build the build container, use the -c ("container only") opt
 
     ./build.sh -p <build-directory> -o <distro> -c
 
+Alternatively you can set a project to be a container-only project by adding
+`CONTAINER_ONLY=yes` to its *build-defaults.env*.
+
 This can be useful when building container images instead of applications.
 
 Build artefacts can be located from

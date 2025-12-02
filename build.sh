@@ -17,7 +17,7 @@ usage() {
 }
 
 NO_CACHE="no"
-CONTAINER_ONLY="no"
+CONTAINER_ONLY=""
 PROJECT_DIR=""
 AFTER_SCRIPT=""
 OS=""
@@ -60,6 +60,12 @@ fi
 if ! [ -d "${PROJECT_DIR}" ]; then
     echo "ERROR: build directory ${PROJECT_DIR} not found!"
     exit 1
+fi
+
+# If we're not forced to do a container-only build, then check if project is
+# defined as a container-only.
+if [ "${CONTAINER_ONLY}" == "" ]; then
+    CONTAINER_ONLY=$(. "${PROJECT_DIR}/build-defaults.env" ; echo $CONTAINER_ONLY)
 fi
 
 PROJECT=$(basename $PROJECT_DIR)
