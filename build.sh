@@ -131,7 +131,6 @@ RUN_AFTER=""
 test -x "${PROJECT_DIR}/after.sh" && RUN_AFTER="${PROJECT_DIR}/after.sh"
 test -x "${AFTER_SCRIPT}" && RUN_AFTER="${AFTER_SCRIPT}"
 
-set -x
 if [ "${RUN_AFTER}" != "" ]; then
     "${RUN_AFTER}"
 else
