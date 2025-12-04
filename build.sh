@@ -124,10 +124,16 @@ if [ "${CONTAINER_ONLY}" != "yes" ]; then
     podman run -i --name $CONTAINER --env-file=${PROJECT_DIR}/build-defaults.env $CUSTOM_ENV_FILE_PARAM -v podman-builds:/output$VOLUME_OPTIONS "localhost/$IMAGE"
 fi
 
-# Run the "after" script defined with "-a" parameter, if defined. Otherwise try
-# to run the project's default "after" script.
-if [ "${AFTER_SCRIPT}" != "" ]; then
-    test -x "${AFTER_SCRIPT}" && "${AFTER_SCRIPT}"
+# Run the "after" script defined with "-a" parameter, if defined.  If not, then
+# run the project's default "after" script if it is available. It is usually
+# fine if neither exist, so exit 0 in any case.
+RUN_AFTER=""
+test -x "${PROJECT_DIR}/after.sh" && RUN_AFTER="${PROJECT_DIR}/after.sh"
+test -x "${AFTER_SCRIPT}" && RUN_AFTER="${AFTER_SCRIPT}"
+
+set -x
+if [ "${RUN_AFTER}" != "" ]; then
+    "${RUN_AFTER}"
 else
-    test -x "${PROJECT_DIR}/after.sh" && "${PROJECT_DIR}/after.sh"
+    true
 fi
