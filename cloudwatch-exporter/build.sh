@@ -20,7 +20,7 @@ cd cloudwatch-exporter
 mvn package
 
 cp "${BASEDIR}/cloudwatch-exporter.service" "${UNIT_DIR}/"
-cp "${BASEDIR}/aws_profile" "${ETC_DIR}/"
+cp "${BASEDIR}/aws_credentials_file" "${ETC_DIR}/"
 cp "${BASEDIR}/config.yaml" "${ETC_DIR}/"
 cp "${BASEDIR}/cloudwatch-exporter/target/cloudwatch_exporter-${FPM_VERSION}-jar-with-dependencies.jar" "${BIN_DIR}/cloudwatch-exporter.jar"
 
